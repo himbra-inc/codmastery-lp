@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply for Activation — COD Mastery</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --blue: #1da1e8;
+    --blue-dark: #0e87cc;
+    --blue-light: rgba(29,161,232,0.12);
+    --bg: #07080a;
+    --bg2: #0d1117;
+    --text: #e8edf2;
+    --muted: #6b7c8f;
+    --border: #1a2535;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 40px; border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .nav-logo { height: 36px; }
+
+  .hero {
+    text-align: center; padding: 80px 20px 40px;
+    background: radial-gradient(ellipse at 50% 0%, rgba(29,161,232,0.1) 0%, transparent 60%);
+  }
+  .badge {
+    display: inline-block; background: var(--blue-light); color: var(--blue);
+    padding: 6px 16px; border-radius: 50px; font-size: 12px;
+    font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px;
+  }
+  .hero h1 { font-size: clamp(28px, 4vw, 44px); font-weight: 800; color: #fff; margin-bottom: 12px; }
+  .hero p { font-size: 17px; color: var(--muted); max-width: 520px; margin: 0 auto; }
+
+  .form-wrap { max-width: 680px; margin: 0 auto; padding: 40px 20px 100px; }
+
+  .progress { display: flex; gap: 8px; margin-bottom: 40px; }
+  .progress-step {
+    flex: 1; height: 4px; border-radius: 2px; background: var(--border);
+    transition: background 0.3s;
+  }
+  .progress-step.active { background: var(--blue); }
+
+  .form-section { display: none; }
+  .form-section.active { display: block; }
+
+  .section-label {
+    font-size: 12px; color: var(--blue); font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .section-title { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .section-desc { font-size: 15px; color: var(--muted); margin-bottom: 32px; }
+
+  .field { margin-bottom: 24px; }
+  label { display: block; font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  label .req { color: var(--blue); }
+  input[type=text], input[type=email], input[type=tel], select, textarea {
+    width: 100%; background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px 16px; color: var(--text);
+    font-size: 15px; font-family: inherit;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--blue); }
+  select option { background: #1a2535; }
+  textarea { resize: vertical; min-height: 100px; }
+
+  .radio-group { display: flex; flex-direction: column; gap: 12px; }
+  .radio-opt {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px; cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .radio-opt:hover { border-color: var(--blue); }
+  .radio-opt input[type=radio] { margin-top: 3px; accent-color: var(--blue); flex-shrink: 0; }
+  .radio-opt-label { font-size: 15px; color: var(--text); font-weight: 600; }
+  .radio-opt-desc { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  .btn-row { display: flex; gap: 12px; margin-top: 32px; }
+  .btn-next {
+    flex: 1; background: var(--blue); color: #fff;
+    padding: 16px; font-size: 16px; font-weight: 700;
+    border-radius: 8px; border: none; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-next:hover { background: var(--blue-dark); }
+  .btn-back {
+    background: transparent; color: var(--muted);
+    padding: 16px 24px; font-size: 15px; font-weight: 600;
+    border-radius: 8px; border: 1px solid var(--border); cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .btn-back:hover { border-color: var(--blue); color: var(--blue); }
+
+  .disclaimer {
+    font-size: 13px; color: var(--muted); text-align: center; margin-top: 20px;
+  }
+
+  /* SUCCESS */
+  .success { display: none; text-align: center; padding: 60px 20px; }
+  .success.active { display: block; }
+  .success-icon { font-size: 64px; margin-bottom: 24px; }
+  .success h2 { font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 12px; }
+  .success p { font-size: 17px; color: var(--muted); max-width: 480px; margin: 0 auto; }
+</style>
+</head>
+<body>
+
+<nav>
+  <img src="logo.jpg.html" alt="COD Mastery" class="nav-logo">
+</nav>
+
+<div class="hero">
+  <div class="badge">Step 1 of 3 — Application</div>
+  <h1>Apply for Activation</h1>
+  <p>This takes 3 minutes. Answer honestly — we only accept operators we can actually activate fast.</p>
+</div>
+
+<div class="form-wrap">
+  <div class="progress">
+    <div class="progress-step active" id="p1"></div>
+    <div class="progress-step" id="p2"></div>
+    <div class="progress-step" id="p3"></div>
+  </div>
+
+  <form id="applicationForm">
+  <!-- SECTION 1: About You -->
+  <div class="form-section active" id="s1">
+    <div class="section-label">Section 1 of 3</div>
+    <div class="section-title">About You</div>
+    <div class="section-desc">Basic info so we know who we're talking to.</div>
+
+    <div class="field">
+      <label>Full Name <span class="req">*</span></label>
+      <input type="text" id="name" name="full_name" placeholder="Your full name" required>
+    </div>
+    <div class="field">
+      <label>Email Address <span class="req">*</span></label>
+      <input type="email" id="email" name="email" placeholder="your@email.com" required>
+    </div>
+    <div class="field">
+      <label>WhatsApp Number <span class="req">*</span></label>
+      <input type="tel" id="phone" name="whatsapp" placeholder="+1 234 567 8900" required>
+    </div>
+    <div class="field">
+      <label>Country of Residence <span class="req">*</span></label>
+      <select id="country" name="country" required>
+        <option value="">Select your country</option>
+        <option>Morocco</option>
+        <option>Saudi Arabia</option>
+        <option>United Arab Emirates</option>
+        <option>Egypt</option>
+        <option>Turkey</option>
+        <option>France</option>
+        <option>United States</option>
+        <option>United Kingdom</option>
+        <option>Mexico</option>
+        <option>Colombia</option>
+        <option>Brazil</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="btn-next" onclick="next(1)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Experience -->
+  <div class="form-section" id="s2">
+    <div class="section-label">Section 2 of 3</div>
+    <div class="section-title">Your Experience</div>
+    <div class="section-desc">We need to understand where you are today. Be honest — it helps us place you correctly.</div>
+
+    <div class="field">
+      <label>How long have you been doing e-commerce? <span class="req">*</span></label>
+      <div class="radio-group">
+        <label class="radio-opt">
+          <input type="radio" name="experience" value="less1">
+          <div><div class="radio-opt-label">Less than 1 year</div><div class="radio-opt-desc">Just getting started</div></div>
+        </label>
+        <label class="radio-opt">
+          <input type="radio" name="experience" value="1to3">
+          <div><div class="radio-opt-label">1–3 years</div><div class="radio-opt-desc">Running campaigns, some results</div></div>
+        </label>
+        <label class="radio-opt">
+          <input type="radio" name="experience" value="3plus">
+          <div><div class="radio-opt-label">3+ years</div><div class="radio-opt-desc">Experienced operator, scaling</div></div>
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>What's your current monthly ad spend? <span class="req">*</span></label>
+      <div class="radio-group">
+        <label class="radio-opt">
+          <input type="radio" name="adspend" value="0">
+          <div><div class="radio-opt-label">$0 — I haven't started</div></div>
+        </label>
+        <label class="radio-opt">
+          <input type="radio" name="adspend" value="sub1k">
+          <div><div class="radio-opt-label">Under $1,000/month</div></div>
+        </label>
+        <label class="radio-opt">
+          <input type="radio" name="adspend" value="1kto5k">
+          <div><div class="radio-opt-label">$1,000 – $5,000/month</div></div>
+        </label>
+        <label class="radio-opt">
+          <input type="radio" name="adspend" value="5kplus">
+          <div><div class="radio-opt-label">$5,000+/month</div><div class="radio-opt-desc">Serious operator</div></div>
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Have you ever sold in GCC or LATAM markets before? <span class="req">*</span></label>
+      <div class="radio-group">
+        <label class="radio-opt">
+          <input type="radio" name="markets" value="yes">
+          <div><div class="radio-opt-label">Yes</div><div class="radio-opt-desc">I've run campaigns in these markets</div></div>
+        </label>
+        <label class="radio-opt">
+          <input type="radio" name="markets" value="no">
+          <div><div class="radio-opt-label">No</div><div class="radio-opt-desc">This would be new territory for me</div></div>
+        </label>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button type="button" class="btn-back" onclick="back(2)">← Back</button>
+      <button type="button" class="btn-next" onclick="next(2)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- SECTION 3: Commitment -->
+  <div class="form-section" id="s3">
+    <div class="section-label">Section 3 of 3</div>
+    <div class="section-title">Commitment & Fit</div>
+    <div class="section-desc">Last few questions. These determine if we can actually activate you fast.</div>
+
+    <div class="field">
+      <label>How much capital can you commit to your first test? <span class="req">*</span></label>
+      <div class="radio-group">
+        <label class="radio-opt">
+          <input type="radio" name="capital" value="low">
+          <div><div class="radio-opt-label">Under $500</div></div>
+        </label>
+        <label class="radio-opt">
+          <input type="radio" name="capital" value="mid">
+          <div><div class="radio-opt-label">$500 – $2,000</div></div>
+        </label>
+        <label class="radio-opt">
+          <input type="radio" name="capital" value="high">
+          <div><div class="radio-opt-label">$2,000 – $5,000</div></div>
+        </label>
+        <label class="radio-opt">
+          <input type="radio" name="capital" value="vhigh">
+          <div><div class="radio-opt-label">$5,000+</div><div class="radio-opt-desc">Ready to go hard from day one</div></div>
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Which market are you most interested in? <span class="req">*</span></label>
+      <div class="radio-group">
+        <label class="radio-opt">
+          <input type="radio" name="market_target" value="gcc">
+          <div><div class="radio-opt-label">GCC (Saudi, UAE, Kuwait)</div><div class="radio-opt-desc">Arabic-speaking, COD-dominant</div></div>
+        </label>
+        <label class="radio-opt">
+          <input type="radio" name="market_target" value="latam">
+          <div><div class="radio-opt-label">LATAM (Mexico, Colombia, Brazil)</div><div class="radio-opt-desc">Spanish/Portuguese, fast-growing</div></div>
+        </label>
+        <label class="radio-opt">
+          <input type="radio" name="market_target" value="both">
+          <div><div class="radio-opt-label">Both — I want to expand in multiple markets</div></div>
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Why do you want to join COD Mastery? What's your goal? <span class="req">*</span></label>
+      <textarea id="why" name="goal" placeholder="Be specific. What's your current situation and what do you want to achieve?" required></textarea>
+    </div>
+
+    <div class="field">
+      <label>How did you hear about us?</label>
+      <select id="source" name="referral_source">
+        <option value="">Select one</option>
+        <option>Skool Community</option>
+        <option>Instagram</option>
+        <option>TikTok</option>
+        <option>YouTube</option>
+        <option>Friend / Referral</option>
+        <option>Facebook Ad</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <div class="btn-row">
+      <button type="button" class="btn-back" onclick="back(3)">← Back</button>
+      <button type="button" id="submitBtn" class="btn-next" onclick="submitForm()">Submit Application →</button>
+    </div>
+    <div class="disclaimer">By submitting, you agree to be contacted by our team within 24 hours via WhatsApp or email. Activation fee required upon acceptance.</div>
+  </form>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success" id="success">
+    <div class="success-icon">✅</div>
+    <h2>Application Received.</h2>
+    <p>We review every application manually. You'll hear from us within 24 hours on WhatsApp with next steps — if you qualify.</p>
+    <br>
+    <p style="color: var(--blue); font-weight: 600;">While you wait — make sure you're active in the Skool community.</p>
+  </div>
+</div>
+
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzz5kM74x2q6RBU9AuHllc70Fq59AHcNSReKeBOZC7yQiQzodOXKp6yyNc866Jxa73j/exec';
+
+function next(section) {
+  // Simple validation for current section
+  const currentSection = document.getElementById('s' + section);
+  const inputs = currentSection.querySelectorAll('input[required], select[required], textarea[required]');
+  let valid = true;
+  inputs.forEach(input => {
+    if (!input.value && input.type !== 'radio') {
+      valid = false;
+      input.style.borderColor = 'red';
+    } else if (input.type === 'radio') {
+      const name = input.name;
+      const checked = currentSection.querySelector(`input[name="${name}"]:checked`);
+      if (!checked) {
+        valid = false;
+      }
+    } else {
+      input.style.borderColor = '';
+    }
+  });
+
+  if (!valid) {
+    alert('Please fill in all required fields.');
+    return;
+  }
+
+  document.getElementById('s' + section).classList.remove('active');
+  document.getElementById('p' + section).classList.add('active');
+  if (section < 3) {
+    document.getElementById('s' + (section + 1)).classList.add('active');
+    document.getElementById('p' + (section + 1)).classList.add('active');
+  }
+  window.scrollTo(0, 0);
+}
+
+function back(section) {
+  document.getElementById('s' + section).classList.remove('active');
+  document.getElementById('s' + (section - 1)).classList.add('active');
+  document.getElementById('p' + (section - 1)).classList.remove('active');
+  window.scrollTo(0, 0);
+}
+
+async function submitForm() {
+  const btn = document.getElementById('submitBtn');
+  const originalText = btn.innerText;
+  
+  // Final validation
+  const why = document.getElementById('why');
+  if (!why.value) {
+    why.style.borderColor = 'red';
+    alert('Please tell us why you want to join.');
+    return;
+  }
+
+  btn.innerText = 'Submitting...';
+  btn.disabled = true;
+  btn.style.opacity = '0.5';
+  btn.style.cursor = 'not-allowed';
+
+  try {
+    const form = document.getElementById('applicationForm');
+    const formData = new FormData(form);
+    
+    // We use a simple POST. Apps Script requires 'no-cors' if not using JSONP, 
+    // but standard POST usually works or redirects.
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: formData,
+      mode: 'no-cors' // Google Script Web App often needs no-cors for simple POSTs
+    });
+
+    // Since 'no-cors' doesn't return a readable response, we assume success 
+    // if no exception is thrown.
+    document.getElementById('s3').classList.remove('active');
+    document.getElementById('success').classList.add('active');
+    window.scrollTo(0, 0);
+
+  } catch (error) {
+    console.error('Submission error:', error);
+    alert('There was an error submitting your application. Please try again or contact us directly.');
+    btn.innerText = originalText;
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    btn.style.cursor = 'pointer';
+  }
+}
+</script>
+</body>
+</html>
